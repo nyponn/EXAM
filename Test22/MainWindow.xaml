@@ -1,0 +1,66 @@
+﻿<Window x:Class="EXAM.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Мониторинг условий хранения рыбы" Height="615" Width="900"
+        Background="#F0F0F0">
+
+    <Grid Margin="20,20,20,59">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Label Content="Название предмета:" FontWeight="Bold" FontSize="14" Margin="0,0,0,5"/>
+        <ComboBox Name="ItemComboBox" Width="200" Margin="230,0,130,20">
+            <ComboBoxItem Content="Семга" />
+            <ComboBoxItem Content="Минтай" />
+            <ComboBoxItem Content="Лосось" />
+            <ComboBoxItem Content="Тунец" />
+            <ComboBoxItem Content="Скумбрия" />
+        </ComboBox>
+
+        <Label Content="Дата транспортировки:" FontWeight="Bold" FontSize="14" Margin="0,0,0,5" Grid.Row="1"/>
+        <DatePicker Name="TransportDatePicker" Width="200" Margin="230,0,130,20" Grid.Row="1" SelectedDate="{Binding TransportDate, Mode=TwoWay}"/>
+
+        <Label Content="Время перевозки (часы):" FontWeight="Bold" FontSize="14" Margin="0,0,0,5" Grid.Row="2"/>
+        <TextBox Name="TransportTimeTextBox" Width="200" Margin="230,0,130,20" Grid.Row="2" Padding="5" Background="White" BorderBrush="#CCCCCC" BorderThickness="1" PreviewTextInput="NumericTextBox_PreviewTextInput" LostFocus="TransportTimeTextBox_LostFocus"/>
+
+        <Label Content="Минимальная температура:" FontWeight="Bold" FontSize="14" Margin="0,0,0,5" Grid.Row="3"/>
+        <TextBox Name="MinTempTextBox" Width="200" Margin="230,0,130,20" Grid.Row="3" Padding="5" Background="White" BorderBrush="#CCCCCC" BorderThickness="1" PreviewTextInput="NumericTextBox_PreviewTextInput" LostFocus="MinTempTextBox_LostFocus"/>
+
+        <Label Content="Максимальная температура:" FontWeight="Bold" FontSize="14" Margin="0,0,0,5" Grid.Row="4"/>
+        <TextBox Name="MaxTempTextBox" Width="200" Margin="230,0,130,20" Grid.Row="4" Padding="5" Background="White" BorderBrush="#CCCCCC" BorderThickness="1" PreviewTextInput="NumericTextBox_PreviewTextInput" LostFocus="MaxTempTextBox_LostFocus"/>
+
+        <Label Content="Температура (через запятую):" FontWeight="Bold" FontSize="14" Margin="0,0,0,5" Grid.Row="5"/>
+        <TextBox Name="TemperatureInputTextBox" Width="200" Margin="230,0,130,20" Grid.Row="5" Padding="5" Background="White" BorderBrush="#CCCCCC" BorderThickness="1"/>
+
+        <Label Content="Допустимое время в неподходящей температуре (минуты):" FontWeight="Bold" FontSize="14" Margin="0,0,0,5" Grid.Row="6"/>
+        <TextBox Name="AllowedViolationTimeTextBox" Width="200" Margin="330,0,130,20" Grid.Row="6" Padding="5" Background="White" BorderBrush="#CCCCCC" BorderThickness="1" PreviewTextInput="NumericTextBox_PreviewTextInput" LostFocus="AllowedViolationTimeTextBox_LostFocus"/>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="7" Margin="0,10,0,0">
+            <Button Content="Проверить" Width="120" Click="CheckButton_Click" Margin="0,0,50,0" Background="#FF9370DB" Foreground="White" FontWeight="Bold" Padding="10" Height="40"/>
+            <Button Content="Загрузить из файла" Width="215" Click="LoadFromFileButton_Click" Background="#FF9370DB" Foreground="White" FontWeight="Bold" Padding="10" RenderTransformOrigin="1,0" Height="40">
+                <Button.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform X="0"/>
+                    </TransformGroup>
+                </Button.RenderTransform>
+            </Button>
+        </StackPanel>
+
+        <!-- Обернуть TextBlock в ScrollViewer -->
+        <ScrollViewer Grid.Row="8" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" Margin="0,20,0,0" Height="141">
+            <TextBlock Name="ResultTextBlock" FontSize="14" TextWrapping="Wrap" Foreground="#333333" Height="280"/>
+        </ScrollViewer>
+    </Grid>
+</Window>
